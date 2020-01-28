@@ -1,0 +1,15 @@
+- name: update /etc/hosts file with a list of lan-hosts
+  become: true
+  blockinfile:
+    path: /etc/hosts
+    block: "{{ lookup('template', 'templates/etc/lan-hosts.j2') }}"
+    state: present
+    marker: "### {mark} ANSIBLE MANAGED BLOCK ###"
+    backup: yes
+
+- name: insert an empty line before the marker line
+  become: true
+  replace:
+    path: /etc/hosts
+    regexp: "(?<=.\n)### BEGIN ANSIBLE MANAGED BLOCK ###$"
+    replace: "\n### BEGIN ANSIBLE MANAGED BLOCK ###"

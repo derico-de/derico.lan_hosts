@@ -1,0 +1,3 @@
+---
+
+lan_hosts: "{{ groups['all'] }}"

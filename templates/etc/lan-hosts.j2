@@ -1,0 +1,6 @@
+# internal hosts:
+
+{% for item in lan_hosts %}
+{{ hostvars[item].lan_ip }}     {{ item }}.lan
+{% endfor %}
+
